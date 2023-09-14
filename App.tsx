@@ -7,6 +7,7 @@ import {
   Button,
   FlatList,
   TouchableOpacity,
+  SafeAreaView,
 } from 'react-native';
 import {openDatabase} from 'react-native-sqlite-storage';
 
@@ -194,30 +195,29 @@ const App = () => {
   }, []);
 
   return (
-    <View>
-      <StatusBar backgroundColor="#222" />
-
-      <TextInput
-        placeholder="Enter category"
-        value={category}
-        onChangeText={setCategory}
-        style={{marginHorizontal: 8}}
-      />
-
-      <Button title="Submit" onPress={addCategory} />
-
-      <FlatList
-        data={categories}
-        renderItem={({item}) => (
-          <CategoryItem
-            item={item}
-            deleteCategory={deleteCategory}
-            editCategory={editCategory}
-          />
-        )}
-        keyExtractor={item => item.id.toString()}
-      />
-    </View>
+    <SafeAreaView style={{flex: 1}}>
+      <View>
+        <StatusBar backgroundColor="#222" />
+        <TextInput
+          placeholder="Enter category"
+          value={category}
+          onChangeText={setCategory}
+          style={{marginHorizontal: 8}}
+        />
+        <Button title="Submit" onPress={addCategory} />
+        <FlatList
+          data={categories}
+          renderItem={({item}) => (
+            <CategoryItem
+              item={item}
+              deleteCategory={deleteCategory}
+              editCategory={editCategory}
+            />
+          )}
+          keyExtractor={item => item.id.toString()}
+        />
+      </View>
+    </SafeAreaView>
   );
 };
 
