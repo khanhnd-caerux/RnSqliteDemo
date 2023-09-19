@@ -10,9 +10,14 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
+    "@react-native-community/cameraroll": "^4.1.2",
+    "fbjs": "^3.0.5",
     "react": "18.1.0",
     "react-native": "0.70.10",
-    "react-native-sqlite-storage": "^6.0.1"
+    "react-native-share": "^9.4.1",
+    "react-native-sqlite-storage": "^6.0.1",
+    "react-native-view-shot": "^3.7.0",
+    "rn-fetch-blob": "^0.12.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
