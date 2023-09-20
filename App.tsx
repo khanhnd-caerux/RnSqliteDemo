@@ -20,6 +20,7 @@ import {openDatabase} from 'react-native-sqlite-storage';
 import {captureRef} from 'react-native-view-shot';
 import CameraRoll from '@react-native-community/cameraroll';
 import Share from 'react-native-share';
+import StampData from './Stamp.json';
 
 const db = openDatabase({
   name: 'rn_sqlite',
@@ -135,7 +136,7 @@ const CategoryItem = ({item, deleteCategory, editCategory}: Category) => {
                 justifyContent: 'space-between',
                 flex: 1,
               }}>
-              <View>
+              <View style={{width: 100}}>
                 <Text>{item.name}</Text>
               </View>
               <View>
@@ -145,7 +146,7 @@ const CategoryItem = ({item, deleteCategory, editCategory}: Category) => {
                   }}>
                   <Image
                     source={{
-                      uri: 'https://images.pexels.com/photos/380768/pexels-photo-380768.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=75&w=126',
+                      uri: `https://res.caerux.com/stamp/${item.name}`,
                     }}
                     style={{width: 100, height: 100}}
                   />
@@ -177,7 +178,7 @@ const CategoryItem = ({item, deleteCategory, editCategory}: Category) => {
                 <Text style={styles.text}> Component to be saved </Text>
                 <Image
                   source={{
-                    uri: 'https://images.pexels.com/photos/380768/pexels-photo-380768.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=75&w=126',
+                    uri: `https://res.caerux.com/stamp/${item.name}`,
                   }}
                   style={styles.image}
                 />
@@ -257,18 +258,13 @@ const App = () => {
     });
   };
 
-  const addCategory = () => {
-    if (!category) {
-      alert('Enter category');
-      return false;
-    }
-
+  const addCategory = (item: string) => {
     db.transaction(data => {
       data.executeSql(
         `INSERT INTO categories (name) VALUES (?)`,
-        [category],
+        [item],
         (sqldata, res) => {
-          console.log(`${category} category added successfully`);
+          console.log(`${item} category added successfully`);
           getCategories();
           setCategory('');
         },
@@ -341,12 +337,18 @@ const App = () => {
       );
     });
   };
+
+  const importData = () => {
+    StampData.map(e => {
+      addCategory(e.image_file);
+    });
+  };
+
   useEffect(() => {
     async function fetchData() {
       await createTables();
       await getCategories();
     }
-
     fetchData();
   }, []);
 
@@ -361,6 +363,7 @@ const App = () => {
           style={{marginHorizontal: 8}}
         />
         <Button title="Submit" onPress={addCategory} />
+        <Button title="Loading data" onPress={importData} />
         <FlatList
           data={categories}
           renderItem={({item}) => (
