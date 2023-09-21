@@ -258,11 +258,32 @@ const App = () => {
     });
   };
 
-  const addCategory = (item: string) => {
+  const addData = (item: string) => {
     db.transaction(data => {
       data.executeSql(
         `INSERT INTO categories (name) VALUES (?)`,
         [item],
+        (sqldata, res) => {
+          console.log(`${item} category added successfully`);
+          getCategories();
+          setCategory('');
+        },
+        error => {
+          console.log('error on adding category ' + error.message);
+        },
+      );
+    });
+  };
+
+  const addCategory = () => {
+    if (!category) {
+      alert('Enter name file');
+      return false;
+    }
+    db.transaction(data => {
+      data.executeSql(
+        `INSERT INTO categories (name) VALUES (?)`,
+        [category],
         (sqldata, res) => {
           console.log(`${item} category added successfully`);
           getCategories();
@@ -340,7 +361,7 @@ const App = () => {
 
   const importData = () => {
     StampData.map(e => {
-      addCategory(e.image_file);
+      addData(e.image_file);
     });
   };
 
