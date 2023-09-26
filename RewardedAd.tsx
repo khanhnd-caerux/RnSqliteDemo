@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Button} from 'react-native';
+import {Button, SafeAreaView} from 'react-native';
 import {
   RewardedAd,
   RewardedAdEventType,
@@ -15,7 +15,7 @@ const rewarded = RewardedAd.createForAdRequest(adUnitId, {
   keywords: ['fashion', 'clothing'],
 });
 
-const App = () => {
+const RewardedAdComponent = () => {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -57,4 +57,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default RewardedAdComponent;

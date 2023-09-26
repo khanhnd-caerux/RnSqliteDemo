@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Button} from 'react-native';
+import {Button, SafeAreaView} from 'react-native';
 import {
   InterstitialAd,
   AdEventType,
@@ -15,7 +15,7 @@ const interstitial = InterstitialAd.createForAdRequest(adUnitId, {
   keywords: ['fashion', 'clothing'],
 });
 
-const App = () => {
+const InterstitialAdComponent = () => {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -47,4 +47,4 @@ const App = () => {
     />
   );
 };
-export default App;
+export default InterstitialAdComponent;

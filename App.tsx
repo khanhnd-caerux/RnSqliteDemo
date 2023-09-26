@@ -19,7 +19,8 @@ import {
 import {openDatabase} from 'react-native-sqlite-storage';
 import {captureRef} from 'react-native-view-shot';
 import CameraRoll from '@react-native-community/cameraroll';
-import Share from 'react-native-share';
+import InterstitialAdComponent from './InterstitialAd';
+import RewardedAdComponent from './RewardedAd';
 import StampData from './Stamp.json';
 
 const db = openDatabase({
@@ -409,6 +410,8 @@ const App = () => {
         <Button title="Submit" onPress={addCategory} />
         <Button title="Loading data" onPress={importData} />
         <Button title="Delete data" onPress={deleteData} />
+        <RewardedAdComponent />
+        <InterstitialAdComponent />
         <FlatList
           data={categories}
           renderItem={({item}) => (
