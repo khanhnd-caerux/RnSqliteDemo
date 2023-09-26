@@ -176,14 +176,12 @@ const CategoryItem = ({item, deleteCategory, editCategory}: Category) => {
             style={styles.scrollView}>
             <View style={styles.body}>
               <View style={styles.savedComponent} ref={viewRef}>
-                <Text style={styles.text}> Component to be saved </Text>
                 <Image
                   source={{
                     uri: `https://res.caerux.com/stamp/${item.name}`,
                   }}
                   style={styles.image}
                 />
-                <Text style={styles.text}>Some random text, also saved</Text>
               </View>
               <View style={styles.row}>
                 <TouchableOpacity style={styles.button} onPress={downloadImage}>
