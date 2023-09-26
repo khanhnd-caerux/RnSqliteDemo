@@ -1,4 +1,8 @@
 {
   "name": "RnSqliteDemo",
-  "displayName": "RnSqliteDemo"
+  "displayName": "RnSqliteDemo",
+  "react-native-google-mobile-ads": {
+    "android_app_id": "ca-app-pub-9711240182969577~8853863093",
+    "ios_app_id": "ca-app-pub-9711240182969577~3361577850"
+  }
 }

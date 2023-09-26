@@ -15,7 +15,7 @@ const interstitial = InterstitialAd.createForAdRequest(adUnitId, {
   keywords: ['fashion', 'clothing'],
 });
 
-function App() {
+const App = () => {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -46,4 +46,5 @@ function App() {
       }}
     />
   );
-}
+};
+export default App;
