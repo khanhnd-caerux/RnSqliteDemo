@@ -169,7 +169,7 @@ const CategoryItem = ({item, deleteCategory, editCategory}: Category) => {
         )}
       </View>
       <Modal animationType="slide" transparent={true} visible={visible}>
-        <SafeAreaView style={styles.safeAreaView}>
+        <View style={styles.safeAreaView}>
           <ScrollView
             contentInsetAdjustmentBehavior="automatic"
             style={styles.scrollView}>
@@ -186,12 +186,19 @@ const CategoryItem = ({item, deleteCategory, editCategory}: Category) => {
               </View>
               <View style={styles.row}>
                 <TouchableOpacity style={styles.button} onPress={downloadImage}>
-                  <Text>Save</Text>
+                  <Text style={{color: '#fff'}}>Save</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={() => {
+                    setVisible(false);
+                  }}>
+                  <Text style={{color: '#fff'}}>Close</Text>
                 </TouchableOpacity>
               </View>
             </View>
           </ScrollView>
-        </SafeAreaView>
+        </View>
       </Modal>
     </>
   );
@@ -203,6 +210,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     zIndex: 2,
     height: '100%',
+    width: '100%',
   },
   scrollView: {
     backgroundColor: 'white',
@@ -219,8 +227,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   image: {
-    width: 252,
-    height: 150,
+    width: 300,
+    height: 300,
     alignSelf: 'center',
     marginTop: 30,
     marginBottom: 5,
