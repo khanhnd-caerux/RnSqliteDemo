@@ -285,7 +285,7 @@ const App = () => {
         `INSERT INTO categories (name) VALUES (?)`,
         [category],
         (sqldata, res) => {
-          console.log(`${item} category added successfully`);
+          console.log(`${category} category added successfully`);
           getCategories();
           setCategory('');
         },
@@ -304,14 +304,12 @@ const App = () => {
         (sqldata, res) => {
           console.log('categories retrieved successfully');
           let len = res.rows.length;
-
           if (len > 0) {
             let results = [];
             for (let i = 0; i < len; i++) {
               let item = res.rows.item(i);
               results.push({id: item.id, name: item.name});
             }
-
             setCategories(results);
           }
         },
@@ -351,6 +349,7 @@ const App = () => {
         (sqldata, res) => {
           console.log(`Category with ID ${categoryId} updated successfully`);
           getCategories(); // Refresh the category list
+          setCategories([]);
         },
         error => {
           console.log('Error updating category: ' + error.message);
@@ -373,18 +372,35 @@ const App = () => {
     fetchData();
   }, []);
 
+  const deleteData = () => {
+    db.transaction(data => {
+      data.executeSql(
+        `DELETE FROM categories`,
+        [],
+        (sqldata, res) => {
+          console.log(`Delete all data from table successfully !`);
+          getCategories(); // Refresh the category list
+        },
+        error => {
+          console.log('Error deleting category: ' + error.message);
+        },
+      );
+    });
+  };
+
   return (
     <SafeAreaView style={{flex: 1}}>
       <View>
         <StatusBar backgroundColor="#222" />
         <TextInput
-          placeholder="Enter category"
+          placeholder="Enter name file"
           value={category}
           onChangeText={setCategory}
           style={{marginHorizontal: 8}}
         />
         <Button title="Submit" onPress={addCategory} />
         <Button title="Loading data" onPress={importData} />
+        <Button title="Delete data" onPress={deleteData} />
         <FlatList
           data={categories}
           renderItem={({item}) => (
